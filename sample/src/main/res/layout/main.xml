@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:com.liefery.android.signature_view.SignatureView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res/com.liefery.android.signature_view.sample"
+        android:id="@+id/signature_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:signatureView_linecolor="#ff0000"
+        app:signatureView_linewidth="4dp">
+
+</app:com.liefery.android.signature_view.SignatureView>
