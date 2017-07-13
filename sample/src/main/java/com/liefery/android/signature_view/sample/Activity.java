@@ -11,6 +11,8 @@ public class Activity extends android.app.Activity {
 
     SignaturePreviewWidget signatureView;
 
+    final int REQUEST_CODE_SIGNATURE = 11;
+
     @Override
     public void onCreate( Bundle state ) {
         super.onCreate( state );
@@ -24,7 +26,7 @@ public class Activity extends android.app.Activity {
                 Intent i = new Intent(
                     getApplicationContext(),
                     SignatureActivity.class );
-                startActivityForResult( i, 1 );
+                startActivityForResult( i, REQUEST_CODE_SIGNATURE );
             }
         } );
     }
@@ -34,7 +36,7 @@ public class Activity extends android.app.Activity {
         int requestCode,
         int resultCode,
         Intent data ) {
-        if ( requestCode == 1 ) {
+        if ( requestCode == REQUEST_CODE_SIGNATURE ) {
             if ( resultCode == Activity.RESULT_OK ) {
                 PathDescriptor result = data.getParcelableExtra( "result" );
                 signatureView.set( result );
