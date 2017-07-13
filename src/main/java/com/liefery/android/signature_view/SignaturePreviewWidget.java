@@ -5,6 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
@@ -14,18 +17,24 @@ import android.widget.FrameLayout;
  */
 public class SignaturePreviewWidget extends FrameLayout {
 
-    Context context;
-
     SignaturePathView pathView;
 
     public SignaturePreviewWidget( Context context ) {
         super( context );
-        init( context );
+
+        TypedArray styles = context
+                        .obtainStyledAttributes( R.styleable.SignaturePreviewWidget );
+        init( context, styles );
+        styles.recycle();
     }
 
     public SignaturePreviewWidget( Context context, AttributeSet attrs ) {
         super( context, attrs );
-        init( context );
+
+        TypedArray styles = context
+                        .obtainStyledAttributes( R.styleable.SignaturePreviewWidget );
+        init( context, styles );
+        styles.recycle();
     }
 
     public SignaturePreviewWidget(
@@ -33,11 +42,14 @@ public class SignaturePreviewWidget extends FrameLayout {
         AttributeSet attrs,
         int defStyleAttr ) {
         super( context, attrs, defStyleAttr );
-        init( context );
+
+        TypedArray styles = context
+                        .obtainStyledAttributes( R.styleable.SignaturePreviewWidget );
+        init( context, styles );
+        styles.recycle();
     }
 
-    private void init( Context context ) {
-        this.context = context;
+    private void init( Context context, TypedArray styles ) {
 
         ( (LayoutInflater) context
                         .getSystemService( Context.LAYOUT_INFLATER_SERVICE ) )
@@ -54,8 +66,12 @@ public class SignaturePreviewWidget extends FrameLayout {
         setForeground( array.getDrawable( 0 ) );
         array.recycle();
 
+        int widgetColor = styles.getColor(
+                R.styleable.SignaturePreviewWidget_signaturePreview_color,
+                Integer.MIN_VALUE );
+        setBackgroundColor( widgetColor == Integer.MIN_VALUE ? ContextCompat.getColor(context, R.color.grey) : widgetColor);
+
         setPadding( 50, 50, 50, 50 );
-        setBackgroundResource( R.color.grey );
     }
 
     public void set( PathDescriptor path ) {

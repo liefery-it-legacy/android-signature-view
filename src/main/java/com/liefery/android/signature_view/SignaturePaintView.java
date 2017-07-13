@@ -23,31 +23,34 @@ public class SignaturePaintView extends View {
 
     private float interval;
 
-    public SignaturePaintView(Context context ) {
+    public SignaturePaintView( Context context ) {
         super( context );
 
         TypedArray styles = context
-                        .obtainStyledAttributes( R.styleable.SignatureView );
+                        .obtainStyledAttributes( R.styleable.SignaturePaintView );
         init( styles );
         styles.recycle();
     }
 
-    public SignaturePaintView(Context context, AttributeSet attrs ) {
+    public SignaturePaintView( Context context, AttributeSet attrs ) {
         super( context, attrs );
 
         TypedArray styles = context.obtainStyledAttributes(
             attrs,
-            R.styleable.SignatureView );
+            R.styleable.SignaturePaintView );
         init( styles );
         styles.recycle();
     }
 
-    public SignaturePaintView(Context context, AttributeSet attrs, int defStyleAttr ) {
+    public SignaturePaintView(
+        Context context,
+        AttributeSet attrs,
+        int defStyleAttr ) {
         super( context, attrs, defStyleAttr );
 
         TypedArray styles = context.obtainStyledAttributes(
             attrs,
-            R.styleable.SignatureView,
+            R.styleable.SignaturePaintView,
             defStyleAttr,
             0 );
         init( styles );
@@ -65,13 +68,13 @@ public class SignaturePaintView extends View {
         paint.setStyle( Paint.Style.STROKE );
 
         int lineColor = styles.getColor(
-            R.styleable.SignatureView_signatureView_linecolor,
+            R.styleable.SignaturePaintView_signatureView_linecolor,
             Integer.MIN_VALUE );
         if ( lineColor != Integer.MIN_VALUE )
             setLineColor( lineColor );
 
         float lineWidth = styles.getDimension(
-            R.styleable.SignatureView_signatureView_linewidth,
+            R.styleable.SignaturePaintView_signatureView_linewidth,
             Float.MIN_VALUE );
         if ( lineWidth != Float.MIN_VALUE )
             setLineWidth( lineWidth );
