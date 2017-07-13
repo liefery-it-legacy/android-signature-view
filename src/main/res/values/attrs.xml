@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <declare-styleable name="SignaturePaintView">
+
+        <attr
+            name="signatureView_linecolor"
+            format="color" />
+
+        <attr
+            name="signatureView_linewidth"
+            format="dimension" />
+
+    </declare-styleable>
+
+</resources>
