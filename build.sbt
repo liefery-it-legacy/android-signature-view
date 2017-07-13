@@ -1,9 +1,13 @@
+
 lazy val root = project.in( file( "." ) )
     .enablePlugins( AndroidLib )
     .settings( Settings.common )
     .settings(
+        resolvers += "google-maven" at "https://maven.google.com",
         libraryDependencies ++=
-            "com.android.support" % "support-annotations" % "25.3.1" % "compile" ::
+            "com.android.support" % "support-annotations" % "25.4.0" % "compile" ::
+            "com.android.support" % "support-compat" % "25.4.0" ::
+            "com.android.support" % "appcompat-v7" % "25.4.0" ::
             Nil,
         name := "signature-view",
         publishArtifact in ( Compile, packageDoc ) := false

@@ -4,12 +4,9 @@ import android.graphics.Path;
 import android.os.Parcel;
 import android.util.Log;
 
-/**
- * Created by gerogerke on 05.07.17.
- */
 public class QuadToAction extends Action {
 
-    float x1, y1, x2, y2;
+    private float x1, y1, x2, y2;
 
     public QuadToAction( float x1, float y1, float x2, float y2 ) {
         this.x1 = x1;
@@ -18,7 +15,7 @@ public class QuadToAction extends Action {
         this.y2 = y2;
     }
 
-    public QuadToAction( Parcel in ) {
+    QuadToAction( Parcel in ) {
         float[] data = new float[4];
         in.readFloatArray( data );
 

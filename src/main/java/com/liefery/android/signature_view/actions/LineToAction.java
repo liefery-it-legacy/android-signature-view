@@ -4,19 +4,16 @@ import android.graphics.Path;
 import android.os.Parcel;
 import android.util.Log;
 
-/**
- * Created by gerogerke on 05.07.17.
- */
 public class LineToAction extends Action {
 
-    float x, y;
+    private float x, y;
 
     public LineToAction( float x, float y ) {
         this.x = x;
         this.y = y;
     }
 
-    public LineToAction( Parcel in ) {
+    LineToAction( Parcel in ) {
         float[] data = new float[2];
         in.readFloatArray( data );
 

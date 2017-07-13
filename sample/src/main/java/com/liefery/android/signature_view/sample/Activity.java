@@ -1,14 +1,15 @@
 package com.liefery.android.signature_view.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import com.liefery.android.signature_view.SignatureView;
+import android.view.View;
+import com.liefery.android.signature_view.PathDescriptor;
+import com.liefery.android.signature_view.SignatureActivity;
+import com.liefery.android.signature_view.SignaturePreviewWidget;
 
 public class Activity extends android.app.Activity {
 
-    SignatureView signatureView;
+    SignaturePreviewWidget signatureView;
 
     @Override
     public void onCreate( Bundle state ) {
@@ -16,24 +17,28 @@ public class Activity extends android.app.Activity {
 
         setContentView( R.layout.main );
 
-        signatureView = (SignatureView) findViewById( R.id.signature_view );
+        signatureView = (SignaturePreviewWidget) findViewById( R.id.signature_preview );
+        signatureView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                Intent i = new Intent(
+                    getApplicationContext(),
+                    SignatureActivity.class );
+                startActivityForResult( i, 1 );
+            }
+        } );
     }
 
     @Override
-    public boolean onCreateOptionsMenu( Menu menu ) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.menu, menu );
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected( MenuItem item ) {
-        switch ( item.getItemId() ) {
-            case R.id.clear_canvas:
-                signatureView.clear();
-                return true;
-            default:
-                return super.onOptionsItemSelected( item );
+    protected void onActivityResult(
+        int requestCode,
+        int resultCode,
+        Intent data ) {
+        if ( requestCode == 1 ) {
+            if ( resultCode == Activity.RESULT_OK ) {
+                PathDescriptor result = data.getParcelableExtra( "result" );
+                signatureView.set( result );
+            }
         }
     }
 

@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import com.liefery.android.stop_badge.R;
 
 public class SignatureView extends View {
 
@@ -25,8 +22,6 @@ public class SignatureView extends View {
     private float x, y;
 
     private float interval;
-
-    Display display;
 
     public SignatureView( Context context ) {
         super( context );
@@ -82,9 +77,6 @@ public class SignatureView extends View {
             setLineWidth( lineWidth );
 
         interval = dpToPx( 2 );
-
-        display = ( (WindowManager) getContext().getSystemService(
-            Context.WINDOW_SERVICE ) ).getDefaultDisplay();
     }
 
     public void setLineColor( int newColor ) {
@@ -180,18 +172,13 @@ public class SignatureView extends View {
         invalidate();
     }
 
-    private void reInit() {
+    public void reInit() {
         path = descriptor.create();
+        invalidate();
+    }
 
-        Matrix matrix = new Matrix();
-        matrix.postRotate(
-            getRotationAngle(),
-            getPivotPointX(),
-            getPivotPointY() );
-
-        matrix.setScale( 0.3f, 0.3f );
-        path.transform( matrix );
-
+    protected void setPath( Path path ) {
+        this.path = path;
         invalidate();
     }
 
@@ -220,50 +207,6 @@ public class SignatureView extends View {
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return dp
             * ( (float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT );
-    }
-
-    private int getRotationAngle() {
-        switch ( ( (WindowManager) getContext().getSystemService(
-            Context.WINDOW_SERVICE ) ).getDefaultDisplay().getRotation() ) {
-            case 1:
-                return 0;
-            case 0:
-                return 45;
-            case 3:
-                return 0;
-            default:
-                return 0;
-        }
-    }
-
-    private float getPivotPointX() {
-        switch ( ( (WindowManager) getContext().getSystemService(
-            Context.WINDOW_SERVICE ) ).getDefaultDisplay().getRotation() ) {
-            case 1:
-                return ( (WindowManager) getContext().getSystemService(
-                    Context.WINDOW_SERVICE ) ).getDefaultDisplay().getHeight();
-            case 0:
-                return display.getHeight();
-            case 3:
-                return ( (WindowManager) getContext().getSystemService(
-                    Context.WINDOW_SERVICE ) ).getDefaultDisplay().getHeight();
-            default:
-                return 0;
-        }
-    }
-
-    private float getPivotPointY() {
-        switch ( ( (WindowManager) getContext().getSystemService(
-            Context.WINDOW_SERVICE ) ).getDefaultDisplay().getRotation() ) {
-            case 1:
-                return 0;
-            case 0:
-                return 0;
-            case 3:
-                return 0;
-            default:
-                return 0;
-        }
     }
 
 }
