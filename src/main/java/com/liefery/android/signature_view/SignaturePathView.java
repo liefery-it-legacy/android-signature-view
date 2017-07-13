@@ -7,7 +7,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-public class SignaturePathView extends SignatureView {
+public class SignaturePathView extends SignaturePaintView {
     public SignaturePathView( Context context ) {
         super( context );
     }

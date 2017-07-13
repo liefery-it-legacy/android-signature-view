@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class SignatureView extends View {
+public class SignaturePaintView extends View {
 
     private Paint paint = new Paint();
 
@@ -23,7 +23,7 @@ public class SignatureView extends View {
 
     private float interval;
 
-    public SignatureView( Context context ) {
+    public SignaturePaintView(Context context ) {
         super( context );
 
         TypedArray styles = context
@@ -32,7 +32,7 @@ public class SignatureView extends View {
         styles.recycle();
     }
 
-    public SignatureView( Context context, AttributeSet attrs ) {
+    public SignaturePaintView(Context context, AttributeSet attrs ) {
         super( context, attrs );
 
         TypedArray styles = context.obtainStyledAttributes(
@@ -42,7 +42,7 @@ public class SignatureView extends View {
         styles.recycle();
     }
 
-    public SignatureView( Context context, AttributeSet attrs, int defStyleAttr ) {
+    public SignaturePaintView(Context context, AttributeSet attrs, int defStyleAttr ) {
         super( context, attrs, defStyleAttr );
 
         TypedArray styles = context.obtainStyledAttributes(

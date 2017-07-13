@@ -9,14 +9,14 @@ import android.view.MenuItem;
 
 public class SignatureActivity extends Activity {
 
-    SignatureView signatureView;
+    SignaturePaintView signatureView;
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_signature_view );
 
-        signatureView = (SignatureView) findViewById( R.id.signature_view );
+        signatureView = (SignaturePaintView) findViewById( R.id.signature_view );
     }
 
     @Override

@@ -2,7 +2,7 @@
 
 <resources>
 
-    <declare-styleable name="SignatureView">
+    <declare-styleable name="SignaturePaintView">
 
         <attr
             name="signatureView_linecolor"
