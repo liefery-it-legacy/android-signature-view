@@ -7,6 +7,8 @@
         android:id="@+id/layout_widget_transaction_signature_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_light" />
+        android:background="@color/grey_light"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"/>
 
 </merge>

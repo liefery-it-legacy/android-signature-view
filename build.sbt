@@ -1,4 +1,3 @@
-
 lazy val root = project.in( file( "." ) )
     .enablePlugins( AndroidLib )
     .settings( Settings.common )

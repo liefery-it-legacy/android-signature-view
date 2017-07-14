@@ -8,7 +8,8 @@
         <activity
                 android:name="com.liefery.android.signature_view.SignatureActivity"
                 android:label="SignatureActivity"
-                android:screenOrientation="landscape"/>
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>

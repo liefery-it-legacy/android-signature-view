@@ -1,7 +1,9 @@
 package com.liefery.android.signature_view;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,14 @@ public class SignatureActivity extends Activity {
         setContentView( R.layout.activity_signature_view );
 
         signatureView = (SignaturePaintView) findViewById( R.id.signature_view );
+
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
+            ActionBar ab = getActionBar();
+            ab.setTitle( getIntent().hasExtra( "ab_title" ) ? getIntent()
+                            .getStringExtra( "ab_title" ) : null );
+            ab.setSubtitle( getIntent().hasExtra( "ab_subtitle" ) ? getIntent()
+                            .getStringExtra( "ab_subtitle" ) : null );
+        }
     }
 
     @Override
@@ -32,9 +42,13 @@ public class SignatureActivity extends Activity {
             signatureView.clear();
             return true;
         } else if ( item.getItemId() == R.id.confirm_signature ) {
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra( "result", signatureView.getSource() );
-            setResult( Activity.RESULT_OK, returnIntent );
+            if ( signatureView.isEmpty() ) {
+                setResult( Activity.RESULT_CANCELED );
+            } else {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra( "result", signatureView.getSource() );
+                setResult( Activity.RESULT_OK, returnIntent );
+            }
             finish();
             return true;
         }
