@@ -67,9 +67,16 @@ public class SignaturePreviewWidget extends FrameLayout {
         array.recycle();
 
         int widgetColor = styles.getColor(
-                R.styleable.SignaturePreviewWidget_signaturePreview_color,
-                Integer.MIN_VALUE );
-        setBackgroundColor( widgetColor == Integer.MIN_VALUE ? ContextCompat.getColor(context, R.color.grey) : widgetColor);
+            R.styleable.SignaturePreviewWidget_signaturePreview_color,
+            Integer.MIN_VALUE );
+        setBackgroundColor( widgetColor == Integer.MIN_VALUE ? ContextCompat
+                        .getColor( context, R.color.grey ) : widgetColor );
+
+        int borderColor = styles.getColor(
+            R.styleable.SignaturePreviewWidget_signaturePreview_borderColor,
+            Integer.MIN_VALUE );
+        pathView.setBackgroundColor( widgetColor == Integer.MIN_VALUE ? ContextCompat
+                        .getColor( context, R.color.grey_light ) : borderColor );
 
         setPadding( 50, 50, 50, 50 );
     }
