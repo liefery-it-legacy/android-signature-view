@@ -25,7 +25,7 @@ public class SignaturePathView extends SignaturePaintView {
 
     @Override
     public boolean onTouchEvent( MotionEvent event ) {
-        return false;
+        return true;
     }
 
     @Override
