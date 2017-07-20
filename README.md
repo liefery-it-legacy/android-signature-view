@@ -42,52 +42,39 @@ dependencies {
 - Paint Stroke completely customizable
 
 ## Usage
-
-Using only the SignatureView, that can be drawn on:
-```xml
-<com.liefery.android.signature_view.SignaturePaintView
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    app:stopBadge_circleColor="#4c8c4a"
-    app:stopBadge_shapeColor="#003300"
-    app:stopBadge_shadowColor="#000000"
-    app:stopBadge_shadowDx="1dp"
-    app:stopBadge_shadowDy="1dp"
-    app:stopBadge_shadowRadius="3dp"
-    app:stopBadge_stopNumber="123" />
-```
-
 Using the SignaturePreviewWidget to trigger the SignatureActivity and display the results in the SignaturePreviewWidget
 ```java
-// Get a SignaturePreviewWidget and set the SignatureActivity to open on click
-signatureView = (SignaturePreviewWidget) findViewById( R.id.signature_preview );
-signatureView.setOnClickListener( new View.OnClickListener() {
+public class Activity extends SignaturePreviewActivity {
+
+    SignaturePreviewWidget signatureView;
+
     @Override
-    public void onClick( View view ) {
-        Intent i = new Intent(
-            getApplicationContext(),
-            SignatureActivity.class );
-        startActivityForResult( i, REQUEST_CODE_SIGNATURE );
+    protected void onCreate( @Nullable Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
+
+        setContentView( R.layout.main );
+
+        signatureView = (SignaturePreviewWidget) findViewById( R.id.signature_preview );
     }
-} );
- 
-...
- 
-@Override
-protected void onActivityResult(
-    int requestCode,
-    int resultCode,
-    Intent data ) {
-    if ( requestCode == REQUEST_CODE_SIGNATURE ) {
-        if ( resultCode == Activity.RESULT_OK ) {
-            // Getting the result from the "result" field of the Intent
-            // and setting it do display in the SignaturePreview
-            PathDescriptor result = data.getParcelableExtra( "result" );
-            signatureView.set( result );
-        }
+
+    @Override
+    public String getSignatureActivityTitle() {
+        return "Kundenunterschrift";
+    }
+
+    @Override
+    public String getSignatureActivitySubtitle() {
+        return "HS9H-AX1U";
+    }
+
+    @Override
+    public SignaturePreviewWidget getSignaturePreviewWidget() {
+        return signatureView;
     }
 }
 ```
+
+All components like `SignatureActivity`, `SignaturePaintView`, `SignaturePathView`, `SignaturePreviewActivity` and `SignaturePreviewWidget` can be used independently from each other as well.
 
 Please have a look at the sample application for more details.
 =======

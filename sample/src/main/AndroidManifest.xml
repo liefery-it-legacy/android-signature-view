@@ -7,7 +7,9 @@
     <application
         android:label="Liefery Signature View Sample">
 
-        <activity android:name="com.liefery.android.signature_view.sample.Activity">
+        <activity
+                android:name="com.liefery.android.signature_view.sample.Activity"
+                android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
             <intent-filter>
 

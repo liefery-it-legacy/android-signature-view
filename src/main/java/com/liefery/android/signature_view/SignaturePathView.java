@@ -43,28 +43,23 @@ public class SignaturePathView extends SignaturePaintView {
             // Normalize to 0,0
             path.offset( -bounds.left, -bounds.top );
 
-            {
-                // Scale to fill the view
-                float width = bounds.right - bounds.left;
-                float height = bounds.bottom - bounds.top;
-                float ratio = Math.min( getWidth() / width, getHeight()
-                    / height ) * 0.9f;
+            // Scale to fill the view
+            float width = bounds.right - bounds.left;
+            float height = bounds.bottom - bounds.top;
+            float ratio = Math.min( getWidth() / width, getHeight() / height ) * 0.9f;
 
-                Matrix matrix = new Matrix();
-                matrix.setScale( ratio, ratio );
-                path.transform( matrix );
-            }
+            Matrix matrix = new Matrix();
+            matrix.setScale( ratio, ratio );
+            path.transform( matrix );
 
-            {
-                // Center
-                path.computeBounds( bounds, false );
-                float width = bounds.right;
-                float height = bounds.bottom;
+            // Center
+            path.computeBounds( bounds, false );
+            width = bounds.right;
+            height = bounds.bottom;
 
-                path.offset(
-                    ( getWidth() - width ) / 2,
-                    ( getHeight() - height ) / 2 );
-            }
+            path.offset(
+                ( getWidth() - width ) / 2,
+                ( getHeight() - height ) / 2 );
 
             setPath( path );
         }
