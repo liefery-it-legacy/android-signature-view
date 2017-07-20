@@ -26,6 +26,8 @@ public class Activity extends android.app.Activity {
                 Intent i = new Intent(
                     getApplicationContext(),
                     SignatureActivity.class );
+                i.putExtra( "ab_title", "Kundenunterschrift" );
+                i.putExtra( "ab_subtitle", "X8TS-0ND1" );
                 startActivityForResult( i, REQUEST_CODE_SIGNATURE );
             }
         } );

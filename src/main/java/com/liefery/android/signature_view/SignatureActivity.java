@@ -1,15 +1,16 @@
 package com.liefery.android.signature_view;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class SignatureActivity extends Activity {
+public class SignatureActivity extends AppCompatActivity {
 
     SignaturePaintView signatureView;
 
@@ -21,11 +22,11 @@ public class SignatureActivity extends Activity {
         signatureView = (SignaturePaintView) findViewById( R.id.signature_view );
 
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
-            ActionBar ab = getActionBar();
-            ab.setTitle( getIntent().hasExtra( "ab_title" ) ? getIntent()
-                            .getStringExtra( "ab_title" ) : null );
-            ab.setSubtitle( getIntent().hasExtra( "ab_subtitle" ) ? getIntent()
-                            .getStringExtra( "ab_subtitle" ) : null );
+            android.support.v7.app.ActionBar ab = getSupportActionBar();
+            if ( ab != null ) {
+                ab.setTitle( getIntent().getStringExtra( "ab_title" ) );
+                ab.setSubtitle( getIntent().getStringExtra( "ab_subtitle" ) );
+            }
         }
     }
 

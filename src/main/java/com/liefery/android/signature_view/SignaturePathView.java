@@ -47,8 +47,8 @@ public class SignaturePathView extends SignaturePaintView {
                 // Scale to fill the view
                 float width = bounds.right - bounds.left;
                 float height = bounds.bottom - bounds.top;
-                float ratio = Math
-                                .min( getWidth() / width, getWidth() / height ) * 0.9f;
+                float ratio = Math.min( getWidth() / width, getHeight()
+                    / height ) * 0.9f;
 
                 Matrix matrix = new Matrix();
                 matrix.setScale( ratio, ratio );

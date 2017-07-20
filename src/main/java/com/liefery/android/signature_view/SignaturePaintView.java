@@ -79,6 +79,8 @@ public class SignaturePaintView extends View {
         if ( lineWidth != Float.MIN_VALUE )
             setLineWidth( lineWidth );
 
+        setBackgroundColor( Color.WHITE );
+
         interval = dpToPx( 2 );
     }
 

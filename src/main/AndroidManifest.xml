@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.liefery.android.signature_view">
 
-    <application >
+    <application>
         <activity
                 android:name="com.liefery.android.signature_view.SignatureActivity"
                 android:label="SignatureActivity"
                 android:screenOrientation="landscape"
-                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+                android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 
 </manifest>
