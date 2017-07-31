@@ -2,7 +2,6 @@ package com.liefery.android.signature_view.actions;
 
 import android.graphics.Path;
 import android.os.Parcel;
-import android.util.Log;
 
 public class MoveToAction extends Action {
 
@@ -14,11 +13,8 @@ public class MoveToAction extends Action {
     }
 
     MoveToAction( Parcel in ) {
-        float[] data = new float[2];
-        in.readFloatArray( data );
-
-        this.x = data[0];
-        this.y = data[1];
+        this.x = in.readFloat();
+        this.y = in.readFloat();
     }
 
     @Override
@@ -39,11 +35,21 @@ public class MoveToAction extends Action {
     @Override
     public void writeToParcel( Parcel parcel, int i ) {
         super.writeToParcel( parcel, i );
-        parcel.writeFloatArray( new float[] { x, y } );
+        parcel.writeFloat( x );
+        parcel.writeFloat( y );
     }
 
     @Override
     public String toString() {
         return "MoveToAction(" + x + ", " + y + ")";
+    }
+
+    @Override
+    public boolean equals( Object obj ) {
+        if ( obj instanceof MoveToAction ) {
+            MoveToAction m1 = (MoveToAction) obj;
+            return x == m1.x && y == m1.y;
+        }
+        return false;
     }
 }

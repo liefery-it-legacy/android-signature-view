@@ -9,7 +9,7 @@
 
         <activity
                 android:name="com.liefery.android.signature_view.sample.Activity"
-                android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+                android:theme="@style/AppTheme">
 
             <intent-filter>
 

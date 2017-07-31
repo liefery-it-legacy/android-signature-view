@@ -1,6 +1,6 @@
 import android.Keys._
-import sbt._
 import sbt.Keys._
+import sbt._
 
 object Settings {
     val common = Def.settings(

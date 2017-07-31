@@ -1,36 +1,76 @@
 package com.liefery.android.signature_view;
 
 import android.content.Context;
-import android.graphics.Matrix;
-import android.graphics.Path;
-import android.graphics.RectF;
+import android.content.res.Resources;
+import android.graphics.*;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.View;
 
-public class SignaturePathView extends SignaturePaintView {
-    public SignaturePathView( Context context ) {
+public class SignaturePreviewView extends View {
+
+    Path signature = new Path();
+
+    Paint paint = new Paint();
+
+    PathDescriptor source;
+
+    public SignaturePreviewView( Context context ) {
         super( context );
+
+        init();
     }
 
-    public SignaturePathView( Context context, AttributeSet attrs ) {
+    public SignaturePreviewView( Context context, AttributeSet attrs ) {
         super( context, attrs );
+
+        init();
     }
 
-    public SignaturePathView(
+    public SignaturePreviewView(
         Context context,
         AttributeSet attrs,
         int defStyleAttr ) {
         super( context, attrs, defStyleAttr );
+
+        init();
+    }
+
+    private void init() {
+        setBackgroundColor( ContextCompat.getColor(
+            getContext(),
+            R.color.grey_light ) );
+
+        paint.setAntiAlias( true );
+        paint.setColor( Color.BLACK );
+        paint.setDither( true );
+        paint.setStrokeCap( Paint.Cap.ROUND );
+        paint.setStrokeJoin( Paint.Join.ROUND );
+        paint.setStrokeWidth( dpToPx( 4 ) );
+        paint.setStyle( Paint.Style.STROKE );
     }
 
     @Override
-    public boolean onTouchEvent( MotionEvent event ) {
-        return true;
+    protected void onDraw( Canvas canvas ) {
+        canvas.drawPath( signature, paint );
     }
 
-    @Override
-    public void reInit() {
+    public PathDescriptor getSource() {
+        return source;
+    }
+
+    public void set( PathDescriptor source ) {
+        this.source = source;
         rescale();
+    }
+
+    public void setPath( Path path ) {
+        this.signature = path;
+        invalidate();
     }
 
     private void rescale() {
@@ -63,5 +103,32 @@ public class SignaturePathView extends SignaturePaintView {
 
             setPath( path );
         }
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable( "state", super.onSaveInstanceState() );
+        bundle.putParcelable( "descriptor", this.source );
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState( Parcelable state ) {
+        if ( state instanceof Bundle ) {
+            Bundle bundle = (Bundle) state;
+            PathDescriptor descriptor = bundle.getParcelable( "descriptor" );
+            set( descriptor );
+            state = bundle.getParcelable( "state" );
+        }
+
+        super.onRestoreInstanceState( state );
+    }
+
+    private float dpToPx( float dp ) {
+        Resources resources = getContext().getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp
+            * ( (float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT );
     }
 }

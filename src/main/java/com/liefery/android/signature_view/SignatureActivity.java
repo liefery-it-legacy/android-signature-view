@@ -16,6 +16,9 @@ public class SignatureActivity extends AppCompatActivity {
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
+
+        setThemeIfPassed( getIntent().getExtras() );
+
         setContentView( R.layout.activity_signature_view );
 
         signatureView = (SignaturePaintView) findViewById( R.id.signature_view );
@@ -53,5 +56,12 @@ public class SignatureActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected( item );
+    }
+
+    private void setThemeIfPassed( Bundle extras ) {
+        if ( extras.containsKey( "theme" ) ) {
+            int theme = extras.getInt( "theme" );
+            setTheme( theme );
+        }
     }
 }

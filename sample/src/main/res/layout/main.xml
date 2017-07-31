@@ -5,11 +5,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <com.liefery.android.signature_view.SignaturePreviewWidget
+    <com.liefery.android.signature_view.SignaturePreviewView
             android:id="@+id/signature_preview"
             android:layout_width="match_parent"
             android:layout_height="300dp">
 
-    </com.liefery.android.signature_view.SignaturePreviewWidget>
+    </com.liefery.android.signature_view.SignaturePreviewView>
 
 </LinearLayout>

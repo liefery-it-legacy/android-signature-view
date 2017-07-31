@@ -2,7 +2,6 @@ package com.liefery.android.signature_view.actions;
 
 import android.graphics.Path;
 import android.os.Parcel;
-import android.util.Log;
 
 public class QuadToAction extends Action {
 
@@ -16,13 +15,10 @@ public class QuadToAction extends Action {
     }
 
     QuadToAction( Parcel in ) {
-        float[] data = new float[4];
-        in.readFloatArray( data );
-
-        x1 = data[0];
-        y1 = data[1];
-        x2 = data[2];
-        y2 = data[3];
+        x1 = in.readFloat();
+        y1 = in.readFloat();
+        x2 = in.readFloat();
+        y2 = in.readFloat();
     }
 
     @Override
@@ -43,11 +39,23 @@ public class QuadToAction extends Action {
     @Override
     public void writeToParcel( Parcel parcel, int i ) {
         super.writeToParcel( parcel, i );
-        parcel.writeFloatArray( new float[] { x1, y1, x2, y2 } );
+        parcel.writeFloat( x1 );
+        parcel.writeFloat( y1 );
+        parcel.writeFloat( x2 );
+        parcel.writeFloat( y2 );
     }
 
     @Override
     public String toString() {
         return "QuadToAction(" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ")";
+    }
+
+    @Override
+    public boolean equals( Object obj ) {
+        if ( obj instanceof QuadToAction ) {
+            QuadToAction q1 = (QuadToAction) obj;
+            return x1 == q1.x1 && x2 == q1.x2 && y1 == q1.y1 && y2 == q1.y2;
+        }
+        return false;
     }
 }

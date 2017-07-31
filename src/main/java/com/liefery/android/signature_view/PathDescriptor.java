@@ -1,11 +1,12 @@
 package com.liefery.android.signature_view;
 
-import android.graphics.Matrix;
 import android.graphics.Path;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.liefery.android.signature_view.actions.*;
 import com.liefery.android.signature_view.actions.Action;
+import com.liefery.android.signature_view.actions.LineToAction;
+import com.liefery.android.signature_view.actions.MoveToAction;
+import com.liefery.android.signature_view.actions.QuadToAction;
 
 import java.util.LinkedList;
 
@@ -81,4 +82,13 @@ public class PathDescriptor implements Parcelable {
             return new PathDescriptor[size];
         }
     };
+
+    @Override
+    public boolean equals( Object obj ) {
+        if ( obj instanceof PathDescriptor ) {
+            PathDescriptor p1 = new PathDescriptor();
+            return actions.containsAll( p1.actions );
+        }
+        return false;
+    }
 }

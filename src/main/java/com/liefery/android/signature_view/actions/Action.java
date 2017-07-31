@@ -3,7 +3,6 @@ package com.liefery.android.signature_view.actions;
 import android.graphics.Path;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 /**
  * Created by gerogerke on 05.07.17.

@@ -1,15 +1,17 @@
 package com.liefery.android.signature_view.sample;
 
+import android.graphics.Path;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 import com.liefery.android.signature_view.PathDescriptor;
 import com.liefery.android.signature_view.SignaturePreviewActivity;
-import com.liefery.android.signature_view.SignaturePreviewWidget;
+import com.liefery.android.signature_view.SignaturePreviewView;
 
 public class Activity extends SignaturePreviewActivity {
 
-    SignaturePreviewWidget signatureView;
+    SignaturePreviewView signatureView;
 
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
@@ -17,7 +19,7 @@ public class Activity extends SignaturePreviewActivity {
 
         setContentView( R.layout.main );
 
-        signatureView = (SignaturePreviewWidget) findViewById( R.id.signature_preview );
+        signatureView = (SignaturePreviewView) findViewById( R.id.signature_preview );
     }
 
     @Override
@@ -45,7 +47,7 @@ public class Activity extends SignaturePreviewActivity {
     }
 
     @Override
-    public SignaturePreviewWidget getSignaturePreviewWidget() {
+    public SignaturePreviewView getSignaturePreviewWidget() {
         return signatureView;
     }
 }

@@ -2,12 +2,11 @@ package com.liefery.android.signature_view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Path;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -15,7 +14,7 @@ import android.view.View;
  */
 public abstract class SignaturePreviewActivity extends AppCompatActivity {
 
-    private final int REQUEST_CODE_SIGNATURE = 11;
+    private static final int REQUEST_CODE_SIGNATURE = 11;
 
     @NonNull
     public abstract String getSignatureActivityTitle();
@@ -24,13 +23,11 @@ public abstract class SignaturePreviewActivity extends AppCompatActivity {
     public abstract String getSignatureActivitySubtitle();
 
     @NonNull
-    public abstract SignaturePreviewWidget getSignaturePreviewWidget();
+    public abstract SignaturePreviewView getSignaturePreviewWidget();
 
     @Override
     public void onPostCreate( Bundle savedInstanceState ) {
         super.onPostCreate( savedInstanceState );
-
-        Log.d( "GEtSign", "" + ( getSignaturePreviewWidget() == null ) );
 
         getSignaturePreviewWidget().setOnClickListener(
             new View.OnClickListener() {
@@ -41,6 +38,15 @@ public abstract class SignaturePreviewActivity extends AppCompatActivity {
                         SignatureActivity.class );
                     i.putExtra( "ab_title", getSignatureActivityTitle() );
                     i.putExtra( "ab_subtitle", getSignatureActivitySubtitle() );
+                    try {
+                        i.putExtra(
+                            "theme",
+                            getPackageManager().getActivityInfo(
+                                getComponentName(),
+                                0 ).theme );
+                    } catch ( PackageManager.NameNotFoundException e ) {
+                        e.printStackTrace();
+                    }
                     startActivityForResult( i, REQUEST_CODE_SIGNATURE );
                 }
             } );
