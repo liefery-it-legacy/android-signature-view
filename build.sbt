@@ -15,8 +15,7 @@ lazy val root = project.in( file( "." ) )
         name := "signature-view",
         publishArtifact in ( Compile, packageDoc ) := false,
         fork in Test := true,
-        unmanagedClasspath in Test ++= (bootClasspath in Android).value,
-            jacoco.settings
+        unmanagedClasspath in Test ++= (bootClasspath in Android).value
     )
 
 lazy val sample = project
@@ -24,7 +23,6 @@ lazy val sample = project
     .settings( Settings.common )
     .settings(
         organization := organization.value + ".signature_view.sample",
-        run := ( run in Android ).evaluated,
-            jacoco.settings
+        run := ( run in Android ).evaluated
     )
     .dependsOn( root )
