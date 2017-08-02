@@ -4,4 +4,9 @@ scala:
    - 2.11.11
 
 script:
-   - sbt ++$TRAVIS_SCALA_VERSION root/compile sample/compile test
+   - sbt root/compile sample/compile test
+
+cache:
+   directories:
+   - $HOME/.sbt
+   - $HOME/.ivy2
