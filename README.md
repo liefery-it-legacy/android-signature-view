@@ -1,6 +1,3 @@
-Work in Progress
---------
-=======
 # Android Signature Widget
 
 > A simple view where a signature can be drawn
@@ -77,4 +74,3 @@ public class Activity extends SignaturePreviewActivity {
 All components like `SignatureActivity`, `SignaturePaintView`, `SignaturePathView`, `SignaturePreviewActivity` and `SignaturePreviewWidget` can be used independently from each other as well.
 
 Please have a look at the sample application for more details.
-=======
