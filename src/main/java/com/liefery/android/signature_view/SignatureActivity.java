@@ -1,15 +1,39 @@
 package com.liefery.android.signature_view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 public class SignatureActivity extends AppCompatActivity {
+
+    public static Intent newInstance(
+        Activity context,
+        String title,
+        String subtitle ) {
+        Intent intent = new Intent( context, SignatureActivity.class );
+        intent.putExtra( "ab_title", title );
+        intent.putExtra( "ab_subtitle", subtitle );
+        try {
+            intent.putExtra(
+                "theme",
+                context.getPackageManager().getActivityInfo(
+                    context.getComponentName(),
+                    0 ).theme );
+        } catch ( PackageManager.NameNotFoundException exception ) {
+            Log.e( "SignatureActivity", "PackageManager failed", exception );
+        }
+
+        return intent;
+    }
 
     SignaturePaintView signatureView;
 

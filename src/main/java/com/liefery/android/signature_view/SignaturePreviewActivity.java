@@ -33,21 +33,11 @@ public abstract class SignaturePreviewActivity extends AppCompatActivity {
             new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
-                    Intent i = new Intent(
-                        getApplicationContext(),
-                        SignatureActivity.class );
-                    i.putExtra( "ab_title", getSignatureActivityTitle() );
-                    i.putExtra( "ab_subtitle", getSignatureActivitySubtitle() );
-                    try {
-                        i.putExtra(
-                            "theme",
-                            getPackageManager().getActivityInfo(
-                                getComponentName(),
-                                0 ).theme );
-                    } catch ( PackageManager.NameNotFoundException e ) {
-                        e.printStackTrace();
-                    }
-                    startActivityForResult( i, REQUEST_CODE_SIGNATURE );
+                    Intent intent = SignatureActivity.newInstance(
+                        SignaturePreviewActivity.this,
+                        getSignatureActivityTitle(),
+                        getSignatureActivitySubtitle() );
+                    startActivityForResult( intent, REQUEST_CODE_SIGNATURE );
                 }
             } );
     }
