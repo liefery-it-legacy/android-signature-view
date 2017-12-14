@@ -5,21 +5,23 @@
     package="com.liefery.android.signature_view.sample">
 
     <application
-        android:label="Liefery Signature View Sample">
+        android:label="Liefery Signature View Sample"
+        android:theme="@style/AppTheme">
 
-        <activity
-                android:name="com.liefery.android.signature_view.sample.Activity"
-                android:theme="@style/AppTheme">
+        <activity android:name=".SampleActivity">
 
             <intent-filter>
 
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".SampleSignatureActivity"
+            android:screenOrientation="landscape" />
 
     </application>
 

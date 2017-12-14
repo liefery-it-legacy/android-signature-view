@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.View;
 
 public class SignaturePreviewView extends View {
@@ -43,7 +42,7 @@ public class SignaturePreviewView extends View {
     private void init() {
         setBackgroundColor( ContextCompat.getColor(
             getContext(),
-            R.color.grey_light ) );
+            R.color.signature_view_signature_preview_background ) );
 
         paint.setAntiAlias( true );
         paint.setColor( Color.BLACK );
@@ -59,11 +58,11 @@ public class SignaturePreviewView extends View {
         canvas.drawPath( signature, paint );
     }
 
-    public PathDescriptor getSource() {
+    public PathDescriptor getSignature() {
         return source;
     }
 
-    public void set( PathDescriptor source ) {
+    public void setSignature( PathDescriptor source ) {
         this.source = source;
         rescale();
     }
@@ -74,8 +73,8 @@ public class SignaturePreviewView extends View {
     }
 
     private void rescale() {
-        if ( !getSource().isEmpty() ) {
-            Path path = getSource().create();
+        if ( !getSignature().isEmpty() ) {
+            Path path = getSignature().create();
 
             RectF bounds = new RectF();
             path.computeBounds( bounds, false );
@@ -118,7 +117,7 @@ public class SignaturePreviewView extends View {
         if ( state instanceof Bundle ) {
             Bundle bundle = (Bundle) state;
             PathDescriptor descriptor = bundle.getParcelable( "descriptor" );
-            set( descriptor );
+            setSignature( descriptor );
             state = bundle.getParcelable( "state" );
         }
 

@@ -17,12 +17,12 @@
     <declare-styleable name="SignaturePreviewWidget">
 
         <attr
-                name="signaturePreview_color"
-                format="color" />
+            name="signaturePreview_color"
+            format="color" />
 
         <attr
-                name="signaturePreview_borderColor"
-                format="color"/>
+            name="signaturePreview_borderColor"
+            format="color" />
 
     </declare-styleable>
 
