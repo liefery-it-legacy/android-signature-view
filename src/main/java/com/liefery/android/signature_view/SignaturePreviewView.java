@@ -64,6 +64,12 @@ public class SignaturePreviewView extends View {
         rescale();
     }
 
+    public void clear() {
+        setSignature( new PathDescriptor() );
+        this.scaledPath = new Path();
+        invalidate();
+    }
+
     private void setScaledDrawingPath( Path path ) {
         this.scaledPath = path;
         invalidate();
