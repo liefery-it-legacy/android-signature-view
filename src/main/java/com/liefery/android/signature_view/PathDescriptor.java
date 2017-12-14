@@ -64,6 +64,11 @@ public class PathDescriptor implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "PathDescriptor(" + actions.toString() + ")";
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -86,9 +91,10 @@ public class PathDescriptor implements Parcelable {
     @Override
     public boolean equals( Object obj ) {
         if ( obj instanceof PathDescriptor ) {
-            PathDescriptor p1 = new PathDescriptor();
-            return actions.containsAll( p1.actions );
+            PathDescriptor path = (PathDescriptor) obj;
+            return path.actions.equals( path.actions );
         }
+
         return false;
     }
 }
