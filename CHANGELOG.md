@@ -1,5 +1,7 @@
 # Changelog
 
-_2017-07-05_
+## 1.0.0
+
+_2017-12-14_
 
  * Initial release

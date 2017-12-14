@@ -4,13 +4,13 @@ lazy val root = project.in( file( "." ) )
     .settings(
         resolvers += "google-maven" at "https://maven.google.com",
         libraryDependencies ++=
-            "org.robolectric" % "robolectric" % "3.3.2" % "test" ::
-            "junit" % "junit" % "4.11" % "test" ::
+            "com.android.support" % "appcompat-v7" % "26.1.0" ::
+            "com.android.support" % "support-annotations" % "26.1.0" % "compile" ::
+            "com.android.support" % "support-compat" % "26.1.0" ::
             "com.novocode" % "junit-interface" % "0.11" % "test" ::
-            "org.assertj" % "assertj-core" % "1.7.1" % "test" ::
-            "com.android.support" % "support-annotations" % "25.4.0" % "compile" ::
-            "com.android.support" % "support-compat" % "25.4.0" ::
-            "com.android.support" % "appcompat-v7" % "25.4.0" ::
+            "junit" % "junit" % "4.12" % "test" ::
+            "org.assertj" % "assertj-core" % "3.8.0" % "test" ::
+            "org.robolectric" % "robolectric" % "3.5.1" % "test" ::
             Nil,
         name := "signature-view",
         publishArtifact in ( Compile, packageDoc ) := false,
