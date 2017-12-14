@@ -1,8 +1,6 @@
 package com.liefery.android.signature_view;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -48,12 +46,16 @@ public abstract class SignaturePreviewActivity extends AppCompatActivity {
         int resultCode,
         Intent data ) {
         if ( requestCode == REQUEST_CODE_SIGNATURE ) {
-            if ( resultCode == Activity.RESULT_OK ) {
-                PathDescriptor result = data.getParcelableExtra( "result" );
-                getSignaturePreviewWidget().set( result );
-                onSignatureReceived( result );
-            } else {
+            SignatureActivityResultHandler handler = new SignatureActivityResultHandler(
+                resultCode,
+                data );
+
+            if ( handler.isEmpty() ) {
                 onSignatureEmpty();
+            } else {
+                PathDescriptor pathDescriptor = handler.getPathDescriptor();
+                getSignaturePreviewWidget().set( pathDescriptor );
+                onSignatureReceived( pathDescriptor );
             }
         }
     }
