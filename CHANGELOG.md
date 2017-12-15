@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+_2017-12-15_
+
+ * Add ripple effect to `SignaturePreviewView` clicks
+
 ## 1.0.2
 
 _2017-12-15_

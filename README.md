@@ -13,7 +13,7 @@
 ```scala
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.liefery" % "android-signature-widget" % "1.0.2"
+libraryDependencies += "com.github.liefery" % "android-signature-widget" % "1.0.3"
 ```
 
 ### Gradle
@@ -27,7 +27,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.github.liefery:android-signature-widget:1.0.2'
+    compile 'com.github.liefery:android-signature-widget:1.0.3'
 }
 ```
 
