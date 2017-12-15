@@ -2,15 +2,18 @@ package com.liefery.android.signature_view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.FrameLayout;
 
-public class SignaturePreviewView extends View {
+public class SignaturePreviewView extends FrameLayout {
     private Paint paint = Util.lineStyle( getResources() );
 
     private PathDescriptor pathDescriptor = new PathDescriptor();
@@ -40,6 +43,13 @@ public class SignaturePreviewView extends View {
 
     private void initialize() {
         setBackgroundResource( R.color.signature_view_signature_preview_background );
+
+        setClickable( true );
+
+        int[] attributes = { R.attr.selectableItemBackground };
+        TypedArray array = getContext().obtainStyledAttributes( attributes );
+        setForeground( array.getDrawable( 0 ) );
+        array.recycle();
     }
 
     @Override
