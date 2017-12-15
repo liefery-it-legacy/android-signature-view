@@ -1,6 +1,7 @@
 package com.liefery.android.signature_view;
 
-import android.graphics.Path;
+import android.content.Context;
+import android.graphics.*;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.liefery.android.signature_view.actions.Action;
@@ -15,11 +16,22 @@ public class PathDescriptor implements Parcelable {
     LinkedList<Action> actions = new LinkedList<>();
 
     public PathDescriptor() {
-
     }
 
     public PathDescriptor( Parcel in ) {
         in.readTypedList( actions, Action.CREATOR );
+    }
+
+    public Bitmap export( Context context, int width, int height ) {
+        Bitmap bitmap = Bitmap.createBitmap(
+            width,
+            height,
+            Bitmap.Config.ARGB_8888 );
+        Path path = create( width, height );
+        Canvas canvas = new Canvas( bitmap );
+        canvas.drawColor( Color.WHITE );
+        canvas.drawPath( path, Util.lineStyle( context.getResources() ) );
+        return bitmap;
     }
 
     public void moveTo( float x, float y ) {
@@ -57,9 +69,39 @@ public class PathDescriptor implements Parcelable {
 
     public Path create() {
         Path path = new Path();
+
         for ( Action action : actions ) {
             action.replay( path );
         }
+
+        return path;
+    }
+
+    public Path create( int width, int height ) {
+        Path path = create();
+
+        RectF bounds = new RectF();
+        path.computeBounds( bounds, false );
+
+        // Normalize to 0,0
+        path.offset( -bounds.left, -bounds.top );
+
+        // Scale to fill the view
+        float pathWidth = bounds.right - bounds.left;
+        float pathHeight = bounds.bottom - bounds.top;
+        float ratio = Math.min( width / pathWidth, height / pathHeight ) * 0.9f;
+
+        Matrix matrix = new Matrix();
+        matrix.setScale( ratio, ratio );
+        path.transform( matrix );
+
+        // Center
+        path.computeBounds( bounds, false );
+        pathWidth = bounds.right;
+        pathHeight = bounds.bottom;
+
+        path.offset( ( width - pathWidth ) / 2, ( height - pathHeight ) / 2 );
+
         return path;
     }
 

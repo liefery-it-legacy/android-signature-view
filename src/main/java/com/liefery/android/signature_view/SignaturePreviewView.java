@@ -51,9 +51,9 @@ public class SignaturePreviewView extends View {
         return pathDescriptor;
     }
 
-    public void setSignature( PathDescriptor source ) {
-        this.pathDescriptor = source;
-        rescale();
+    public void setSignature( PathDescriptor signature ) {
+        this.pathDescriptor = signature;
+        setScaledDrawingPath( signature.create( getWidth(), getHeight() ) );
     }
 
     public void clear() {
@@ -67,43 +67,6 @@ public class SignaturePreviewView extends View {
         invalidate();
     }
 
-    private void rescale() {
-        if ( pathDescriptor.isEmpty() )
-            return;
-
-        int viewWidth = getWidth();
-        int viewHeight = getHeight();
-
-        if ( viewWidth == 0 || viewHeight == 0 )
-            return;
-
-        Path path = getSignature().create();
-
-        RectF bounds = new RectF();
-        path.computeBounds( bounds, false );
-
-        // Normalize to 0,0
-        path.offset( -bounds.left, -bounds.top );
-
-        // Scale to fill the view
-        float width = bounds.right - bounds.left;
-        float height = bounds.bottom - bounds.top;
-        float ratio = Math.min( viewWidth / width, viewHeight / height ) * 0.9f;
-
-        Matrix matrix = new Matrix();
-        matrix.setScale( ratio, ratio );
-        path.transform( matrix );
-
-        // Center
-        path.computeBounds( bounds, false );
-        width = bounds.right;
-        height = bounds.bottom;
-
-        path.offset( ( viewWidth - width ) / 2, ( viewHeight - height ) / 2 );
-
-        setScaledDrawingPath( path );
-    }
-
     @Override
     protected void onSizeChanged(
         int width,
@@ -111,7 +74,7 @@ public class SignaturePreviewView extends View {
         int oldWidth,
         int oldHeight ) {
         super.onSizeChanged( width, height, oldWidth, oldHeight );
-        rescale();
+        setScaledDrawingPath( pathDescriptor.create( width, height ) );
     }
 
     @Override

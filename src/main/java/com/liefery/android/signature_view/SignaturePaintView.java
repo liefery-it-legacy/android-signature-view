@@ -100,7 +100,7 @@ public class SignaturePaintView extends View {
                 x = localX;
                 y = localY;
 
-                reInit();
+                setPath( descriptor.create() );
             break;
             case MotionEvent.ACTION_MOVE:
                 if ( Math.abs( localX - x ) >= interval
@@ -115,16 +115,17 @@ public class SignaturePaintView extends View {
                     y = localY;
                 }
 
-                reInit();
+                setPath( descriptor.create() );
             break;
             case MotionEvent.ACTION_UP:
                 if ( x != localX || y != localY ) {
                     descriptor.lineTo( x, y );
-                    reInit();
+                    setPath( descriptor.create() );
                 }
             break;
         }
-        reInit();
+
+        setPath( descriptor.create() );
         return true;
     }
 
@@ -138,17 +139,7 @@ public class SignaturePaintView extends View {
 
     public void clear() {
         descriptor.reset();
-        reInit();
-        invalidate();
-    }
-
-    public Bitmap export() {
-        Bitmap bitmap = Bitmap.createBitmap(
-            getWidth(),
-            getHeight(),
-            Bitmap.Config.ARGB_8888 );
-        new Canvas( bitmap ).drawPath( path, paint );
-        return bitmap;
+        setPath( new Path() );
     }
 
     public PathDescriptor getSignature() {
@@ -157,20 +148,17 @@ public class SignaturePaintView extends View {
 
     public void setSignature( PathDescriptor signature ) {
         this.descriptor = signature;
-        reInit();
-        invalidate();
+        setPath( descriptor.create() );
     }
 
     @Override
-    protected void onSizeChanged( int w, int h, int oldw, int oldh ) {
-        super.onSizeChanged( w, h, oldw, oldh );
-        reInit();
-        invalidate();
-    }
-
-    private void reInit() {
-        path = descriptor.create();
-        invalidate();
+    protected void onSizeChanged(
+        int width,
+        int height,
+        int oldWidth,
+        int oldHeight ) {
+        super.onSizeChanged( width, height, oldWidth, oldHeight );
+        setPath( descriptor.create() );
     }
 
     private void setPath( Path path ) {

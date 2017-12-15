@@ -55,6 +55,7 @@ public class SampleActivity extends AppCompatActivity {
     }
 
     public void onSignatureEmpty() {
+        signatureView.clear();
         Toast.makeText(
             this,
             "Signature was returned empty!",
