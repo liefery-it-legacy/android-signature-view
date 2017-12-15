@@ -13,7 +13,7 @@ import android.view.View;
 
 public class SignaturePaintView extends View {
 
-    private Paint paint = new Paint();
+    private Paint paint = Util.lineStyle( getResources() );
 
     private Path path = new Path();
 
@@ -58,15 +58,6 @@ public class SignaturePaintView extends View {
     }
 
     private void init( TypedArray styles ) {
-
-        paint.setAntiAlias( true );
-        paint.setColor( Color.BLACK );
-        paint.setDither( true );
-        paint.setStrokeCap( Paint.Cap.ROUND );
-        paint.setStrokeJoin( Paint.Join.ROUND );
-        paint.setStrokeWidth( dpToPx( 4 ) );
-        paint.setStyle( Paint.Style.STROKE );
-
         int lineColor = styles.getColor(
             R.styleable.SignaturePaintView_signatureView_linecolor,
             Integer.MIN_VALUE );
@@ -81,7 +72,7 @@ public class SignaturePaintView extends View {
 
         setBackgroundColor( Color.WHITE );
 
-        interval = dpToPx( 2 );
+        interval = Util.dpToPx( getResources(), 2 );
     }
 
     public void setLineColor( int newColor ) {
@@ -160,12 +151,12 @@ public class SignaturePaintView extends View {
         return bitmap;
     }
 
-    public PathDescriptor getSource() {
+    public PathDescriptor getSignature() {
         return descriptor;
     }
 
-    public void setSource( PathDescriptor descriptor ) {
-        this.descriptor = descriptor;
+    public void setSignature( PathDescriptor signature ) {
+        this.descriptor = signature;
         reInit();
         invalidate();
     }
@@ -177,12 +168,12 @@ public class SignaturePaintView extends View {
         invalidate();
     }
 
-    public void reInit() {
+    private void reInit() {
         path = descriptor.create();
         invalidate();
     }
 
-    protected void setPath( Path path ) {
+    private void setPath( Path path ) {
         this.path = path;
         invalidate();
     }
@@ -200,18 +191,10 @@ public class SignaturePaintView extends View {
         if ( state instanceof Bundle ) {
             Bundle bundle = (Bundle) state;
             PathDescriptor descriptor = bundle.getParcelable( "descriptor" );
-            setSource( descriptor );
+            setSignature( descriptor );
             state = bundle.getParcelable( "state" );
         }
 
         super.onRestoreInstanceState( state );
     }
-
-    private float dpToPx( float dp ) {
-        Resources resources = getContext().getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return dp
-            * ( (float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT );
-    }
-
 }

@@ -5,13 +5,13 @@ import android.content.res.Resources;
 import android.graphics.*;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
 public class SignaturePreviewView extends View {
-
-    private Paint paint = new Paint();
+    private Paint paint = Util.lineStyle( getResources() );
 
     private PathDescriptor pathDescriptor = new PathDescriptor();
 
@@ -40,14 +40,6 @@ public class SignaturePreviewView extends View {
 
     private void initialize() {
         setBackgroundResource( R.color.signature_view_signature_preview_background );
-
-        paint.setAntiAlias( true );
-        paint.setColor( Color.BLACK );
-        paint.setDither( true );
-        paint.setStrokeCap( Paint.Cap.ROUND );
-        paint.setStrokeJoin( Paint.Join.ROUND );
-        paint.setStrokeWidth( dpToPx( 4 ) );
-        paint.setStyle( Paint.Style.STROKE );
     }
 
     @Override
@@ -141,12 +133,5 @@ public class SignaturePreviewView extends View {
         } else {
             super.onRestoreInstanceState( state );
         }
-    }
-
-    private float dpToPx( float dp ) {
-        Resources resources = getContext().getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return dp
-            * ( (float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT );
     }
 }

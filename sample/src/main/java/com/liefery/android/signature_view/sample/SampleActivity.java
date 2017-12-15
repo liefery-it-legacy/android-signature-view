@@ -26,9 +26,10 @@ public class SampleActivity extends AppCompatActivity {
         signatureView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
-                startActivityForResult( new Intent(
+                Intent intent = SampleSignatureActivity.newInstance(
                     SampleActivity.this,
-                    SampleSignatureActivity.class ), 777 );
+                    signatureView.getSignature() );
+                startActivityForResult( intent, 777 );
             }
         } );
     }

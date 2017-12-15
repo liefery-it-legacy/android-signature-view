@@ -31,46 +31,6 @@ dependencies {
 }
 ```
 
-## Features
-
-- `SignaturePreviewWidget`, `SignaturePaintView` and `SignaturePathView` to obtain, display and handle signatures in you Android application
-- Signature Path can easily be converted to a `PathDescriptor` which is Parcelable
-- Easily generate Bitmaps from Signatures
-- Paint Stroke completely customizable
-
 ## Usage
-Using the SignaturePreviewWidget to trigger the SignatureActivity and display the results in the SignaturePreviewWidget
-```java
-public class Activity extends SignaturePreviewActivity {
-
-    SignaturePreviewWidget signatureView;
-
-    @Override
-    protected void onCreate( @Nullable Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-
-        setContentView( R.layout.main );
-
-        signatureView = (SignaturePreviewWidget) findViewById( R.id.signature_preview );
-    }
-
-    @Override
-    public String getSignatureActivityTitle() {
-        return "Kundenunterschrift";
-    }
-
-    @Override
-    public String getSignatureActivitySubtitle() {
-        return "HS9H-AX1U";
-    }
-
-    @Override
-    public SignaturePreviewWidget getSignaturePreviewWidget() {
-        return signatureView;
-    }
-}
-```
-
-All components like `SignatureActivity`, `SignaturePaintView`, `SignaturePathView`, `SignaturePreviewActivity` and `SignaturePreviewWidget` can be used independently from each other as well.
 
 Please have a look at the sample application for more details.
