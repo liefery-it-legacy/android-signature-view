@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+_2018-01-15_
+
+ * Add `SignaturePreviewView.OnSignatureChangedListener`
+
 ## 1.0.3
 
 _2017-12-15_
