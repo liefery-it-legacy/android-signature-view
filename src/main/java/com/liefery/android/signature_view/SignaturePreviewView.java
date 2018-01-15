@@ -20,6 +20,8 @@ public class SignaturePreviewView extends FrameLayout {
 
     private Path scaledPath = new Path();
 
+    private OnSignatureChangedListener signatureChangedListener;
+
     public SignaturePreviewView( Context context ) {
         super( context );
 
@@ -63,6 +65,10 @@ public class SignaturePreviewView extends FrameLayout {
 
     public void setSignature( PathDescriptor signature ) {
         this.pathDescriptor = signature;
+
+        if ( signatureChangedListener != null )
+            signatureChangedListener.onSignatureChanged( signature );
+
         setScaledDrawingPath( signature.create( getWidth(), getHeight() ) );
     }
 
@@ -70,6 +76,11 @@ public class SignaturePreviewView extends FrameLayout {
         setSignature( new PathDescriptor() );
         this.scaledPath = new Path();
         invalidate();
+    }
+
+    public void setOnSignatureChangedListener(
+        OnSignatureChangedListener listener ) {
+        this.signatureChangedListener = listener;
     }
 
     private void setScaledDrawingPath( Path path ) {
@@ -106,5 +117,9 @@ public class SignaturePreviewView extends FrameLayout {
         } else {
             super.onRestoreInstanceState( state );
         }
+    }
+
+    public interface OnSignatureChangedListener {
+        void onSignatureChanged( PathDescriptor signature );
     }
 }
