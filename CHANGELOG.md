@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+
+_2018-02-05_
+
+ * Hide reset signature button in overflow menu
+
 ## 1.0.4
 
 _2018-01-15_
