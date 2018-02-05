@@ -53,10 +53,10 @@ public abstract class SignatureActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected( MenuItem item ) {
         int id = item.getItemId();
 
-        if ( id == R.id.clear_canvas ) {
+        if ( id == R.id.signature_view_action_reset ) {
             signatureView.clear();
             return true;
-        } else if ( id == R.id.confirm_signature ) {
+        } else if ( id == R.id.signature_view_action_done ) {
             finish();
             return true;
         }

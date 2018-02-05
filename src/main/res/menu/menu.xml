@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/clear_canvas"
-          android:title="Clear Canvas"
-          android:icon="@drawable/ic_delete_white_24dp"
-          app:showAsAction="ifRoom"/>
-    <item android:id="@+id/confirm_signature"
-          android:title="Done"
-          android:icon="@drawable/ic_done_white_24dp"
-          app:showAsAction="always"/>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/signature_view_action_done"
+        android:icon="@drawable/ic_done_white_24dp"
+        android:title="@string/signature_view_action_done"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/signature_view_action_reset"
+        android:title="@string/signature_view_action_reset"
+        app:showAsAction="never" />
+
 </menu>

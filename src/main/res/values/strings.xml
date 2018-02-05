@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="signature_view_action_reset">Reset</string>
+    <string name="signature_view_action_done">Done</string>
+
+</resources>
