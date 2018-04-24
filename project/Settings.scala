@@ -11,8 +11,8 @@ object Settings {
             Nil,
         minSdkVersion := "14",
         organization := "com.liefery.android",
-        platformTarget := "android-26",
+        platformTarget := "android-27",
         scalaVersion := "2.11.12",
-        targetSdkVersion := "26"
+        targetSdkVersion := "27"
     )
 }

@@ -4,8 +4,8 @@ lazy val root = project.in( file( "." ) )
     .settings(
         resolvers += "google-maven" at "https://maven.google.com",
         libraryDependencies ++=
-            "com.android.support" % "appcompat-v7" % "26.1.0" ::
-            "com.android.support" % "design" % "26.1.0" ::
+            "com.android.support" % "appcompat-v7" % "27.1.1" ::
+            "com.android.support" % "design" % "27.1.1" ::
             "com.novocode" % "junit-interface" % "0.11" % "test" ::
             "junit" % "junit" % "4.12" % "test" ::
             "org.assertj" % "assertj-core" % "3.8.0" % "test" ::
